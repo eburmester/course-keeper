@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :assignments
   resources :courses
   resources :users do
-    get 'users/index', to:  'users#show'
     resources :courses, only: [:index, :show, :new, :edit]
   end
   

@@ -8,7 +8,7 @@ class UsersController < ApplicationController
         @user = current_user
         if logged_in?
           if @user == User.find_by(id: params[:id])
-            render :layout => "profile"
+            redirect_to user_profile_path(current_user)
           else 
             render :new
           end
