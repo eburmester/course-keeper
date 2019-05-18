@@ -4,6 +4,12 @@ Rails.application.routes.draw do
   resources :submissions
   resources :assignments
   resources :courses
-  resources :users
+  resources :users do
+    get 'users/index', to:  'users#show'
+    resources :courses, only: [:index, :show, :new, :edit]
+  end
+  
+  get '/login', to: 'homepage#login'
+  post '/login', to: 'users#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

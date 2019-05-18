@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    helper_method :is_logged_in?, :current_user
+    helper_method :logged_in?, :current_user
     
     def index
     end 
@@ -12,10 +12,11 @@ class UsersController < ApplicationController
           else 
             render :new
           end
+        end 
     end
 
     def new
-        if is_logged_in?
+        if logged_in?
             redirect_to user_profile_path(current_user)
         else 
             @user = User.new 
@@ -30,13 +31,14 @@ class UsersController < ApplicationController
             else
                 render :new
             end
-    end 
+    end
+
 
     
 
     private 
 
     def user_params 
-        params(:user).permit(:name, :email, :password)
+        params(:user).permit(:name, :email, :password, :password_confirmation)
     end 
 end

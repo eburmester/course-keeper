@@ -1,6 +1,11 @@
-<p>"hello"</p>
-#welcome to site
-#login link
-#signup link
-#course index link
-#list popular courses
+<head>
+    <h1>Welcome to the GIFT Course Keeper!</h1>
+    <h3>Your one-stop-shop for taking and creating courses.</h3>
+    <p>
+    <%= button_to "Sign Up", new_user_path, :method => "get", class: "btn btn-success btn-block" %>
+    <%= button_to "Log In", login_path, :method => "get", class: "btn btn-info btn-block" %>
+    </p>
+</head>
+
+
+
