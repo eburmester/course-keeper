@@ -1,3 +1,3 @@
-class CompletedAssignment < ApplicationRecord
+class CompletedAssignment < ActiveRecord::Base
   belongs_to :assignment
 end
