@@ -1,14 +1,2 @@
-require './config/environment'
-
-if ActiveRecord::Migrator.needs_migration?
-  raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
-end
-
-use Rack::MethodOverride
-
-use CoursesController
-use UsersController
-use AssignmentsController
-use SubmissionsController
-use CompletedAssignmentsController
-run ApplicationController
+require ::File.expand_path('../config/environment', __FILE__)
+run Rails.application

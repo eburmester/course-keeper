@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'homepage#index'
   resources :completed_assignments
   resources :submissions
   resources :assignments
