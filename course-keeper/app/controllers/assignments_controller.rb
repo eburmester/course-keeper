@@ -1,4 +1,0 @@
-class AssignmentsController < ApplicationController
-    
-end
-
