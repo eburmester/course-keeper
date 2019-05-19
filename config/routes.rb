@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   resources :assignments
   resources :courses
   resources :users do
-    resources :courses, only: [:index, :show, :new, :edit]
+    resources :courses, only: [:index, :show, :new, :update, :destroy]
   end
   
-  get '/login', to: 'homepage#login'
-  post '/login', to: 'users#create'
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

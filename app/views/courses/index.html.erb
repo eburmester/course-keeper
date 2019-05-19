@@ -1,1 +1,6 @@
-#global list
+<h1>All Available Courses</h1>
+
+<% @courses.each do |course|%>
+  <%= link_to course.title, course_path(course) %>
+  <%= course.description %>
+<% end %>

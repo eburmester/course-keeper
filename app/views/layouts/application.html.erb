@@ -4,27 +4,15 @@
 <html>
   <head>
     <title>CourseKeeper</title>
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+      <%= csrf_meta_tags %>
   </head>
-
-  <body>
-    <%= render partial: "shared/navbar" %>
-    <%= render partial: "shared/alerts" %>
-    <div class="m-3">
-      <%= yield :header %>
-      <div class="row mt-4">
-        <div class="col-2">
-          <%= yield :vertical_nav %>
-        </div>
-        <div class="col-8">
-          <%= yield :content %>
-        </div>
-        <div class="col-2">
-          <%= yield :sidebar %>
-        </div>
-        <%= yield %>
-      </div>
-    </div>
-  </body>
+<body>
+ 
+<%= yield %>
+ 
+</body>
 </html>
 
 

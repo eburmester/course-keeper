@@ -1,4 +1,12 @@
 
+<h1><%= @course.title %></h1>
+<p>Description: <%= @course.description %></p>
+<p>Created By: <%= @course.created_by %></p>
+<p>Created On: <%= @course.created_on %></p>
+<% if @course.created_by == current_user %>
+<%= link_to "Edit", edit_course_path(@course) %><br />
+<%= link_to "Delete", @course, method: :delete %>
+<% end %>
 
 
 
@@ -6,12 +14,3 @@
 
 
 
-
-
-#difficulty selection box
-<select class="custom-select">
-  <option selected>Difficulty Level</option>
-  <option value="ease">Easy</option>
-  <option value="medium">Medium</option>
-  <option value="hard">Hard</option>
-</select>

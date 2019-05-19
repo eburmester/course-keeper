@@ -1,7 +1,0 @@
-<%= form_for @user do |f| %>
-  <strong><%= f.label :name %></strong> <%= f.text_field :name, class:"form-control" %><br>
-  <strong><%= f.label :email %></strong> <%= f.text_field :email, class:"form-control" %><br>
-  <strong><%= f.label :password %></strong> <%= f.password_field :password, class:"form-control" %><br>
-  <strong><%= f.label :password_confirmation %></strong> <%= f.password_field :password_confirmation, class:"form-control" %><br>
-  <%= f.submit "Create my account", class: "btn btn-primary" %>
-<% end %>
