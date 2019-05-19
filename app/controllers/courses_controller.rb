@@ -1,4 +1,6 @@
 class CoursesController < ApplicationController
+    require 'date'
+    
     def index
         @courses = Course.all
     end 
@@ -7,14 +9,12 @@ class CoursesController < ApplicationController
         @course = Course.find_by(params[:id])
     end
 
-    def new
-        @course = Course.new
-    end
-
-    def create 
-        @course = Course.find_by(params[:id])
+    def new 
+        @course = Course.new(course_params)
+        @course.created_by = current_user
+        @course.created_on = Date.today
         if @course.save
-            redirect_to course_path(@course)
+            redirect_to user_course_path(@course)
         else 
             render :new 
         end 
@@ -22,14 +22,19 @@ class CoursesController < ApplicationController
 
     def update
         @course = Course.find_by(params[:id])
-            if @course.user = current_user
-                render :edit 
+            if @course.created_by == current_user
+                redirect_to edit_course_path(@course)
             else 
                 flash[:notice] = "You do not have access to this page!"
                 redirect_to course_path(@course)
-            end 
+        end 
     end
 
     def destroy
     end 
+
+    private
+
+    def course_params
+        params.require(:course).permit(:title, :description)
 end 
