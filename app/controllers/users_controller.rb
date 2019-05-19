@@ -2,6 +2,7 @@ class UsersController < ApplicationController
     helper_method :logged_in?, :current_user
     
     def index
+        @user = current_user
         if logged_in?
           redirect_to user_path(current_user)
         else
@@ -28,7 +29,6 @@ class UsersController < ApplicationController
     end 
 
     def show
-        binding.pry
         @user = current_user
         if logged_in?
           if @user == User.find_by(id: params[:id])
