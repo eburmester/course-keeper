@@ -1,17 +1,8 @@
 class UsersController < ApplicationController
     helper_method :logged_in?, :current_user
-    
-    def index
-        @user = current_user
-        if logged_in?
-          redirect_to user_path(current_user)
-        else
-          redirect_to new_user_path
-        end
-      end
-    
+    before_action :require_login, only: [:index, :show]
       def new 
-        @user = User.new 
+        @user = User.new
       end 
 
       def create
@@ -25,23 +16,15 @@ class UsersController < ApplicationController
       end
 
     def index
-        @user = current_user
+        @user = User.find_by(id: params[:id])
     end 
 
     def show
-        @user = current_user
-        if logged_in?
-          if @user == User.find_by(id: params[:id])
-            redirect_to user_path(@user)
-          else 
-            render :new
-          end
-        end 
     end
 
     private 
 
     def user_params 
-        params.require(:user).permit(:name, :email, :password, :password_confirmation)
+        params.require(:user).permit(:name, :email, :password)
     end 
 end

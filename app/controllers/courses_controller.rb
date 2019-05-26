@@ -6,15 +6,18 @@ class CoursesController < ApplicationController
     end 
 
     def show
-        @course = Course.find_by(params[:id])
+        @course = Course.find_by(id: params[:id])
     end
 
-    def new 
+    def new
+        @course = Course.new
+    end 
+
+    def create 
         @course = Course.new(course_params)
-        @course.created_by = current_user
-        @course.created_on = Date.today
         if @course.save
-            redirect_to user_course_path(@course)
+            flash[:message] = "#{@course.title} has been created"
+            redirect_to course_path(@course)
         else 
             render :new 
         end 
@@ -37,4 +40,5 @@ class CoursesController < ApplicationController
 
     def course_params
         params.require(:course).permit(:title, :description)
+    end
 end 

@@ -8,9 +8,7 @@
   <br />
   <%= f.label :password %>
   <%= f.password_field :password %>
-  <br />
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
   <br /><br />
   <%= f.submit %>
 <% end %>
+<p>Already have an Account? <%= link_to "Log In", login_path %></p>
