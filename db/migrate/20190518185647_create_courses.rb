@@ -3,7 +3,7 @@ class CreateCourses < ActiveRecord::Migration[5.2]
     create_table :courses do |t|
       t.string :title
       t.text :description
-      t.string :level
+      t.integer :user_id
       t.datetime :created_on
       t.string :created_by
 

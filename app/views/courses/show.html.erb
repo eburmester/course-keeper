@@ -1,8 +1,12 @@
 <h1><%= @course.title %></h1>
 <p>Description: <%= @course.description %></p>
-<p>Created By: <%= @course.created_by %></p>
-<p>Created On: <%= @course.created_on %></p>
-<% if @course.created_by == current_user %>
+</br>
+<p>Created On: <%= @course.created_on.strftime("%B %e, %Y") %></p>
+<p>Assignments: <%= @course.assignments.each do |a|%>
+            <%= link_to "a.title", assignment_path(a)%>
+            <% end %>
+</p>
+<% if @course.created_by == current_user.id %>
 <%= link_to "Edit", edit_course_path(@course) %><br />
 <%= link_to "Delete", @course, method: :delete %>
 <% end %>

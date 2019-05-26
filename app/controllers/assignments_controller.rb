@@ -19,5 +19,9 @@ class AssignmentsController < ApplicationController
 
     def destroy
     end 
+
+    private 
+
+   
 end
 
