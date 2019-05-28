@@ -18,7 +18,7 @@ class CoursesController < ApplicationController
 
     def create 
         @user = current_user
-        @course = Course.build(course_params)
+        @course = Course.new(course_params)
         @course.created_by = current_user
         @course.created_on = Date.today
         if @course.save
@@ -28,14 +28,20 @@ class CoursesController < ApplicationController
             render :new 
         end 
     end 
+    
+    def edit 
+        @course = Course.find_by(params[:id])
+    end
+
 
     def update
         @course = Course.find_by(params[:id])
-            if @course.created_by == current_user
-                redirect_to edit_course_path(@course)
-            else 
-                flash[:notice] = "You do not have access to this page!"
+        @user = current_user
+            if @course.save!
                 redirect_to course_path(@course)
+                flash[:message] = "#{@course.title} updated!"
+            else 
+                redirect_to edit_course_path(@course)
         end 
     end
 
