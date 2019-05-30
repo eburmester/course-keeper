@@ -19,7 +19,7 @@ class CoursesController < ApplicationController
     def create 
         @user = current_user
         @course = Course.new(course_params)
-        @course.created_by = current_user
+        @course.user = current_user
         @course.created_on = Date.today
         if @course.save
             flash[:message] = "#{@course.title} has been created"
@@ -30,14 +30,13 @@ class CoursesController < ApplicationController
     end 
     
     def edit 
-        @course = Course.find_by(params[:id])
+        @course = Course.find_by(id: params[:id])
     end
 
 
     def update
-        @course = Course.find_by(params[:id])
-        @user = current_user
-            if @course.save!
+        @course = Course.find_by(id: params[:id])
+            if @course.update(course_params)
                 redirect_to course_path(@course)
                 flash[:message] = "#{@course.title} updated!"
             else 

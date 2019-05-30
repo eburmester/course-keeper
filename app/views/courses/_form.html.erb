@@ -5,7 +5,7 @@
   <%= f.label :description %>:
   <%= f.text_area :description %>
   <br>
-  <%= f.hidden_field :created_by, value: current_user.id %>
+  <%= f.hidden_field :created_by, value: current_user %>
   <%= f.hidden_field :created_on, value: Date.today %>
   </br>
   <%= f.submit %>

@@ -1,0 +1,7 @@
+<h1>Submit your assignment!</h1>
+<%= form_for @submission do |s| %>
+  <%= s.label :content %>:
+  <%= s.text_field :content %>
+  </br>
+  <%= s.submit %>
+  <%end%>

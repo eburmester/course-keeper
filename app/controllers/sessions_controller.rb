@@ -14,5 +14,14 @@ class SessionsController < ApplicationController
       redirect_to :login
     end
   end
+
+  def destroy
+    if logged_in?
+      session.clear
+      redirect_to '/'
+    else
+      redirect_back(fallback_location: root_path)
+    end
+  end
   
 end 

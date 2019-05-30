@@ -6,6 +6,7 @@ class SubmissionsController < ApplicationController
     end
 
     def new
+        @submission = Submission.new
     end
 
     def create 

@@ -1,0 +1,13 @@
+<%= form_for @assignment do |f| %>
+  <%= f.label :title %>:
+  <%= f.text_field :title %>
+  <br>
+   <%= f.radio_button :difficulty, "easy" %>Easy
+   <%= f.radio_button :difficulty, "medium" %>Medium
+   <%= f.radio_button :difficulty, "hard" %>Hard
+  </br>
+  <%= f.hidden_field :course_id, value: current_course %>
+  <%= f.hidden_field :created_on, value: Date.today %>
+  </br>
+  <%= f.submit %>
+<% end %>

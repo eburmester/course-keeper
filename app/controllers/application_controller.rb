@@ -1,10 +1,14 @@
 class ApplicationController < ActionController::Base
-    helper_method :current_user, :logged_in?
+    helper_method :current_user, :logged_in?, :current_course
     
     private 
-    
+
     def current_user
       @user = User.find_by(id: session[:user_id])
+    end
+
+    def current_course
+      @course = Course.find_by(user_id: session[:user_id])
     end
   
     def logged_in?
