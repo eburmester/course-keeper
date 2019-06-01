@@ -18,11 +18,12 @@ class AssignmentsController < ApplicationController
     end
 
     def create 
-        @assignment = Assignment.create(assignment_params)
-        @assignment.course = current_course
+        @course = current_course
+        @assignment = @course.assignments.build(assignment_params)
+   
         if @assignment.save!
             flash[:message] = "#{@assignment.title} has been created"
-            redirect_to assignment_path(@assignment)
+            redirect_to course_assignment_path(@assignment)
         else 
             render :new 
         end
@@ -41,7 +42,7 @@ class AssignmentsController < ApplicationController
     private 
 
     def assignment_params
-        params.require(:assignment).permit(:title, :difficulty, :course_id)
+        params.require(:assignment).permit(:title, :difficulty, :course_id, :user_id)
     end 
    
     def set_course

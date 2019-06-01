@@ -1,2 +1,2 @@
-<h1><%= @assignment.title %></h1>
-<%= link_to "Submit the assignment!", new_submission_path(@assignment) %>
+<h1><%= @assignment.title.upcase %></h1>
+<%= link_to "Submit this assignment!", new_assignment_submission_path(current_assignment) %>

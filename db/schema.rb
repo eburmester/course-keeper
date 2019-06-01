@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 2019_05_18_185852) do
     t.string "title"
     t.string "difficulty"
     t.string "course_id"
+    t.string "submission_id"
+    t.string "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -44,7 +46,7 @@ ActiveRecord::Schema.define(version: 2019_05_18_185852) do
 
   create_table "submissions", force: :cascade do |t|
     t.text "content"
-    t.integer "assignment_id"
+    t.string "assignment_id"
     t.string "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

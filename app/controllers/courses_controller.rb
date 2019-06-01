@@ -12,6 +12,7 @@ class CoursesController < ApplicationController
     def show
         @course = Course.find_by(id: params[:id])
         @assignment = Assignment.find_by(id: params[:id])
+        @user = current_user
     end
 
     def new
@@ -22,7 +23,7 @@ class CoursesController < ApplicationController
         @user = current_user
         @course = @user.courses.build(course_params)
         @course.created_on = Date.today
-        if @course.save
+        if @course.save!
             flash[:message] = "#{@course.title} has been created"
             redirect_to course_path(@course)
         else 
@@ -38,10 +39,10 @@ class CoursesController < ApplicationController
     def update
         @course = Course.find_by(id: params[:id])
             if @course.update(course_params)
-                redirect_to course_path(@course)
+                redirect_to user_course_path(@course)
                 flash[:message] = "#{@course.title} updated!"
             else 
-                redirect_to edit_course_path(@course)
+                redirect_to edit_user_course_path(@course)
         end 
     end
 

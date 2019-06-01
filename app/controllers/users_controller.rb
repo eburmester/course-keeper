@@ -36,6 +36,11 @@ class UsersController < ApplicationController
         redirect_to login_path
       end
     end
+    
+    def submissions
+      @user = current_user
+      @submissions = @user.submissions.all
+    end
 
     private 
 

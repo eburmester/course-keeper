@@ -11,15 +11,16 @@ class SubmissionsController < ApplicationController
 
     def new
         @submission = Submission.new
-        @assignment = current_assignment
     end
 
     def create 
-        @submission = Submission.new(submission_params)
-        @submission.assignment = current_assignment
+        @assignment = current_assignment
+        @user = current_user
+        @submission = @user.submissions.build(submission_params)
+
         if @submission.save!
             flash[:message] = "#{@assignment.title} submitted!"
-            redirect_to assignment_path(current_assignment)
+            redirect_to assignment_submissions_path(current_user)
         else
             flash[:message] = "There was a problem with your submission!"
             redirect_to assignment_path(current_assignment) 
@@ -45,8 +46,12 @@ class SubmissionsController < ApplicationController
         @assignment = Assignment.find_by(id: params[:id])
     end 
 
+    def current_assignment
+        @assignment = Assignment.find_by(id: params[:id])
+      end
+
     def created_by_current_user
-        unless @submission.created_by == current_user.id
+        unless @submission.user_id == current_user.id
           flash[:danger] = "You cannot edit this submission because you did not create it!"
           redirect_to assignment_path(@assignment)
         end

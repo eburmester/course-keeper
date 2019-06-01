@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   helper_method :current_user, :logged_in?, :current_course
-  before_action :set_assignment
+
 
   def new 
     if logged_in?

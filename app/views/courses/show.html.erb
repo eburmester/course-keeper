@@ -1,16 +1,28 @@
-<h1><%= @course.title %></h1>
-<p>Description: <%= @course.description %></p>
+<h1><%= @course.title.upcase %></h1>
+<h2><%= @course.description %></h2>
 </br>
+
+
+<% if @course.assignments.length > 0 %>
+  <p>Assignments: <%= @course.assignments.each do |a|%>
+                    <%= link_to "a.title", course_assignment_path(a)%></br>
+                  <% end %>
+    <% else %>
+      <p> This course doesn't have any assignments yet. </p>
+    <%end%>
+
+<% if @course.user == current_user %>
+  <%= link_to "Add an Assignment", new_course_assignment_path(@course) %></p>
+<%end%>
+</br>
+
 <p>Created On: <%= @course.created_on.strftime("%B %e, %Y") %></p>
-<%= link_to "Add an Assignment", new_assignment_path %>
-<p>Assignments: <%= @course.assignments.each do |a|%>
-            <%= link_to "a.title", assignment_path(a)%>
-            <% end %>
-</p>
+
+
 <p>
 <% if @course.user == current_user %>
-<%= link_to "Edit", edit_course_path(@course) %><br />
-<%= link_to "Delete", @course, method: :delete %>
+<%= link_to "Edit this Course", edit_user_course_path(@course) %><br />
+<%= link_to "Delete this Course", @course, method: :delete %>
 <% end %>
 </p>
 

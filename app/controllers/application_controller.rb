@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
-    helper_method :current_user, :logged_in?, :current_course
+    helper_method :current_user, :logged_in?, :current_course, :current_assignment
     
-    private 
 
     def current_user
       @user = User.find_by(id: session[:user_id])
@@ -12,7 +11,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_assignment
-      @assignment = Assignment.find_by(id: session[:assignment_id])
+      @assignment = Assignment.find_by(user_id: session[:user_id])
     end
   
     def logged_in?
