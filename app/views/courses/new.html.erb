@@ -1,2 +1,2 @@
 <h1>Create a New Course</h1>
-<%= render "courses/form" %>
+<%= render partial: "form", locals: {user: @user, course: @course} %>

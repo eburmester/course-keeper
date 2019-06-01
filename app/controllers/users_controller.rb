@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
   before_action :require_login, only: [:index, :show]
+  helper_method :current_user, :logged_in?, :current_course
       
     def new 
+      if logged_in?
+        redirect_to user_path(current_user)
+      else
         @user = User.new
+      end
     end 
 
     def create
@@ -20,7 +25,16 @@ class UsersController < ApplicationController
     end 
 
     def show
-  
+      if logged_in?
+        if @user == User.find_by(id: params[:id])
+          @user = current_user
+        else
+          flash[:danger] = "You don't have access to view that user's settings!"
+          redirect_to root_path
+        end
+      else
+        redirect_to login_path
+      end
     end
 
     private 

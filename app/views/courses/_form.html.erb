@@ -1,10 +1,11 @@
-<%= form_for @course do |f| %>
+<%= form_for [user, course] do |f| %>
   <%= f.label :title %>:
   <%= f.text_field :title %>
   <br>
   <%= f.label :description %>:
   <%= f.text_area :description %>
   <br>
+
   <%= f.hidden_field :created_by, value: current_user %>
   <%= f.hidden_field :created_on, value: Date.today %>
   </br>

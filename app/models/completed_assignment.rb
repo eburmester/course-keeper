@@ -1,3 +1,4 @@
-class CompletedAssignment < ActiveRecord::Base
-  belongs_to :assignment
+class CompletedAssignment < ApplicationRecord
+  belongs_to :user
+  has_many :submissions
 end

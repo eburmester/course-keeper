@@ -11,6 +11,8 @@
 <body>
  
 <%= yield %>
+</br>
+</br>
 <% if logged_in? %>
 <%= link_to "My Account", user_path(current_user) %>
 <%= link_to "Logout", logout_path %>
