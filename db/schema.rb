@@ -23,10 +23,12 @@ ActiveRecord::Schema.define(version: 2019_05_18_185852) do
   create_table "completed_assignments", force: :cascade do |t|
     t.integer "user_id"
     t.integer "assignment_id"
+    t.integer "submission_id"
     t.datetime "submitted_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["assignment_id"], name: "index_completed_assignments_on_assignment_id"
+    t.index ["submission_id"], name: "index_completed_assignments_on_submission_id"
     t.index ["user_id"], name: "index_completed_assignments_on_user_id"
   end
 
@@ -43,6 +45,7 @@ ActiveRecord::Schema.define(version: 2019_05_18_185852) do
   create_table "submissions", force: :cascade do |t|
     t.text "content"
     t.integer "assignment_id"
+    t.string "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -4,6 +4,7 @@ class CreateAssignments < ActiveRecord::Migration[5.2]
       t.string :title
       t.string :difficulty
       t.string :course_id
+      t.string :submission_id
       t.timestamps
     end
   end
