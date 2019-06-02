@@ -1,9 +1,11 @@
 class SubmissionsController < ApplicationController
-    before_action :set_assignment
+    before_action :set_assignment, only: [:show, :edit, :update]
     before_action :created_by_current_user, only: [:edit, :update]
     helper_method :current_assignment
 
     def index
+        @user = current_user
+        @submissions = Submission.all.find_by(id: params[:user_id])
     end 
 
     def show
@@ -11,16 +13,16 @@ class SubmissionsController < ApplicationController
 
     def new
         @submission = Submission.new
+        @submission.assignment = Assignment.find_by(id: params[:assignment_id])
     end
 
     def create 
-        @assignment = current_assignment
-        @user = current_user
-        @submission = @user.submissions.build(submission_params)
+        @submission = Submission.new(submission_params)
+        @submission.assignment = Assignment.find_by(id: params[:assignment_id])
 
         if @submission.save!
-            flash[:message] = "#{@assignment.title} submitted!"
-            redirect_to assignment_submissions_path(current_user)
+            flash[:message] = "#{@submission.assignment.title} submitted!"
+            redirect_to user_submissions_path(current_user)
         else
             flash[:message] = "There was a problem with your submission!"
             redirect_to assignment_path(current_assignment) 

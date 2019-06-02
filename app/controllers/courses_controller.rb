@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
     helper_method :current_user, :logged_in?, :current_course
 
     def index
-        @courses = current_user.courses
+        @courses = Course.all.uniq
     end 
 
     def show
@@ -25,7 +25,7 @@ class CoursesController < ApplicationController
         @course.created_on = Date.today
         if @course.save!
             flash[:message] = "#{@course.title} has been created"
-            redirect_to course_path(@course)
+            redirect_to user_course_path(@user, @course)
         else 
             render :new 
         end 
@@ -47,6 +47,14 @@ class CoursesController < ApplicationController
     end
 
     def destroy
+        if @course
+            @course.destroy
+            redirect_to user_courses_path
+            flash[:message] = "Your course has been deleted"
+          else
+            render :show
+            flash[:danger] = "This course could not be deleted"
+          end
     end 
 
     private

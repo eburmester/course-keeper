@@ -1,10 +1,10 @@
 <h1>Submit your assignment!</h1>
-<%= form_for @submission do |s| %>
+<%= form_for [assignment, submission] do |s| %>
   <%= s.label :content %>:
   <%= s.text_field :content %>
 
   <%= s.hidden_field :user_id, value: current_user.id %><br>
-
+  <%= s.hidden_field :assignment_id, value: assignment.id %>
   </br>
-  <%= s.submit %>
+  <%= s.submit "Submit" %>
   <%end%>

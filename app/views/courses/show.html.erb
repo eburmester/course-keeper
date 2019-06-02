@@ -21,8 +21,15 @@
 
 <p>
 <% if @course.user == current_user %>
-<%= link_to "Edit this Course", edit_user_course_path(@course) %><br />
-<%= link_to "Delete this Course", @course, method: :delete %>
+<%= form_tag(edit_user_course_path, method: "get") do %>
+  <%= submit_tag("Edit this Course") %>
+  <%end%>
+<%= form_tag(user_course_path, method: "delete") do %>
+  <%= submit_tag("Delete this Course") %>
+<%end%>
+<%= form_tag(user_courses_path, method: "get") do %>
+  <%= submit_tag("Back to My Courses") %>
+  <%end%>
 <% end %>
 </p>
 
