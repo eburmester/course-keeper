@@ -1,15 +1,16 @@
-<h1><%= current_user.name %>'s Created Courses</h1>
+<h1><%= current_user.name %>'s Courses</h1>
 
 <% if @user.courses.empty? %>
-  <p>You don't have any courses! <%= link_to "Create One", new_user_course_path(current_user) %> to start adding courses!</p>
+  <p>You don't have any courses! <%= link_to "Create One", new_user_course_path(@user) %> to start adding courses!</p>
 
 <% else %>
   <% @user.courses.each do |course|%>
     <%= link_to course.title, user_course_path(course.user_id, course.id) %></br>
-  <% end %>
+    Assignments in this course: <%= course.assignments.length %> </br></br>
+    <% end %>
 
 </br> 
 </br> 
 
-<%= link_to "Add a New Course", new_user_course_path(current_user) %>
+<%= link_to "Add a New Course", new_user_course_path(@user) %>
 <%end%>

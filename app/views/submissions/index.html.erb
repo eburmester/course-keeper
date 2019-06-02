@@ -1,9 +1,10 @@
-<h1><%= current_user.name %>'s Submissions </h1>
-
+<h1><%= current_user.name %>'s Submitted Assignments </h1>
+</br>
 <% if @user.submissions.empty? %>
   <p>You don't have any submitted assignments! <%= link_to "Take a Course", courses_path(current_user) %></p>
 <%else%>
   <% @user.submissions.each do |s| %>
+    <p>Course: <%= s.assignment.course.title %>
     <p>Assignment: <%= s.assignment.title.upcase %>
     <p>Submitted on: <%= s.created_at.strftime("%B %e, %Y")%></br></br>
     <%end%></p>

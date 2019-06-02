@@ -10,7 +10,7 @@ class AssignmentsController < ApplicationController
 
     def show
         @assignment = Assignment.find_by(id: params[:id])
-        @course = current_course
+        @course = Course.find_by(id: params[:course_id])
     end
 
     def new

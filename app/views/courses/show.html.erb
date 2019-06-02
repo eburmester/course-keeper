@@ -4,15 +4,17 @@
 
 
 <% if @course.assignments.length > 0 %>
-  <p>Assignments: <%= @course.assignments.each do |a|%>
-            <%= link_to a.title, course_assignment_path(a.course_id, a.id)%></br></p>
+  <h4>Assignments:</h4> 
+  <p><% @course.assignments.each do |a|%>
+            <%= link_to a.title.capitalize, course_assignment_path(a.course_id, a.id)%></br></p>
             <% end %>
     <% else %>
       <p> This course doesn't have any assignments yet. </p>
     <%end%>
 </br>
+</br>
 <% if @course.user == current_user %>
-  <%= link_to "Add an Assignment", new_course_assignment_path(@course.id) %></p>
+  <%= link_to "Add an Assignment", new_course_assignment_path(@course) %></p>
 <%end%>
 </br>
 </br>

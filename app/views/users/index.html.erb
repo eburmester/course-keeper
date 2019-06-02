@@ -1,7 +1,7 @@
-<h1><%= current_user.name %>'s Courses</h1>
+<h1><%= @user.name %>'s Courses</h1>
 
 <% if @user.courses.empty? %>
-  <p>You don't have any courses! <%= link_to "Create One", new_user_course_path(current_user) %> to start adding courses!</p>
+  <p>You don't have any courses! <%= link_to "Create One", new_user_course_path(@user) %> to start adding courses!</p>
 
 <% else %>
   <% @user.courses.each do |course|%>
@@ -11,5 +11,5 @@
 </br> 
 </br> 
 
-<%= link_to "Add a New Course", new_user_course_path(current_user) %>
+<%= link_to "Add a New Course", new_user_course_path(@user) %>
 <%end%>

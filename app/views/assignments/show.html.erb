@@ -1,2 +1,8 @@
 <h1><%= @assignment.title.upcase %></h1>
 <%= link_to "Submit this assignment!", new_assignment_submission_path(@assignment) %>
+</br>
+</br>
+
+<%= form_tag(user_course_path(@user, @assignment.course), method: "get") do %>
+  <%= submit_tag("Back to Course") %>
+  <%end%>

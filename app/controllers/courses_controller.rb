@@ -7,6 +7,7 @@ class CoursesController < ApplicationController
 
     def index
         @courses = Course.all
+        @assignments = Assignment.find_by(id: params[:course_id])
     end 
 
     def show
