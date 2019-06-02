@@ -5,7 +5,7 @@
 
 <% else %>
   <% @user.courses.each do |course|%>
-    <%= link_to course.title, user_course_path(course.id, course.user_id) %></br>
+    <%= link_to course.title, user_course_path(course.user_id, course.id) %></br>
   <% end %>
 
 </br> 

@@ -2,11 +2,11 @@ class CoursesController < ApplicationController
     require 'date'
     before_action :require_login
     before_action :set_user
-    before_action :set_user_course, only: [:show, :edit, :update, :destroy]
+    before_action :set_user_course, only: [:edit, :update, :destroy]
     helper_method :current_user, :logged_in?, :current_course
 
     def index
-        @courses = Course.all.uniq
+        @courses = Course.all
     end 
 
     def show
@@ -49,6 +49,7 @@ class CoursesController < ApplicationController
     def destroy
         if @course
             @course.destroy
+            @course.assignments.destroy
             redirect_to user_courses_path
             flash[:message] = "Your course has been deleted"
           else

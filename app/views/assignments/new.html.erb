@@ -1,2 +1,2 @@
 <h1>Add an Assignment</h1>
-<%= render "assignments/form" %>
+<%= render partial: "form", locals: {assignment: @assignment, course: @assignment.course} %>

@@ -10,9 +10,7 @@ class ApplicationController < ActionController::Base
       @course = Course.find_by(user_id: session[:user_id])
     end
 
-    def current_assignment
-      @assignment = Assignment.find_by(user_id: session[:user_id])
-    end
+
   
     def logged_in?
       !!current_user

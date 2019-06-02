@@ -4,7 +4,7 @@ class AssignmentsController < ApplicationController
     before_action :created_by_current_user, only: [:edit, :update]
     
     def index
-        @assignments = Assignment.all
+        @assignments = Assignment.find_by(id: params[:course_id])
         @course = current_course
     end 
 
@@ -24,7 +24,7 @@ class AssignmentsController < ApplicationController
    
         if @assignment.save!
             flash[:message] = "#{@assignment.title} has been created"
-            redirect_to course_assignment_path(@assignment, @course)
+            redirect_to course_assignment_path(@assignment.course_id, @assignment)
         else 
             render :new 
         end
