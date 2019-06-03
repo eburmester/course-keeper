@@ -1,4 +1,4 @@
 class CompletedAssignment < ApplicationRecord
   belongs_to :user
-  has_many :submissions
+  belongs_to :assignemnt
 end

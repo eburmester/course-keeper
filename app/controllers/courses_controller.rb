@@ -39,11 +39,11 @@ class CoursesController < ApplicationController
 
     def update
         @course = Course.find_by(id: params[:id])
-            if @course.update(course_params)
-                redirect_to user_course_path(@course)
-                flash[:message] = "#{@course.title} updated!"
-            else 
-                redirect_to edit_user_course_path(@course)
+        if @course.update(course_params)
+            redirect_to user_course_path(@course)
+            flash[:message] = "#{@course.title} updated!"
+        else 
+            redirect_to edit_user_course_path(@course)
         end 
     end
 
@@ -53,10 +53,10 @@ class CoursesController < ApplicationController
             @course.assignments.destroy
             redirect_to user_courses_path
             flash[:message] = "Your course has been deleted"
-          else
+        else
             render :show
             flash[:danger] = "This course could not be deleted"
-          end
+        end
     end 
 
     private
