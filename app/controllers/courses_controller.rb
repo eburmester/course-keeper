@@ -10,6 +10,10 @@ class CoursesController < ApplicationController
         @assignments = Assignment.find_by(id: params[:course_id])
     end 
 
+    def all_courses
+        @courses = Course.all
+    end
+
     def show
         @course = Course.find_by(id: params[:id])
         @assignment = Assignment.find_by(id: params[:id])

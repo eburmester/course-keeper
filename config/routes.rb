@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   root 'homepage#index'
   resources :assignments, except: [:new, :show, :edit, :index] do 
-    resources :submissions, only: [:new, :create] 
+    resources :submissions, only: [:new, :create, :index] 
   end 
-  resources :courses, only: [:index] do 
+  get '/courses', to: 'courses#all_courses'
+  resources :courses, only: [:index, :show] do 
     resources :assignments
   end 
   resources :users do 

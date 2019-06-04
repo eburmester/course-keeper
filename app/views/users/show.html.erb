@@ -1,3 +1,7 @@
 <h1 class="display-2"> Welcome back, <%= @user.name %></h1>
 <%= button_to "Create a Course", new_user_course_path(@user), :method => "get", class: "btn btn-info btn-block" %>
 <%= button_to "View My Courses", user_courses_path(@user), :method => "get", class: "btn btn-info btn-block" %>
+</br>
+
+<%= button_to "Take a Course", courses_path, :method => "get", class: "btn btn-info btn-block" %>
+

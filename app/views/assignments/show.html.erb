@@ -1,13 +1,23 @@
 <h1><%= @assignment.title.upcase %></h1>
+<h3>from <%=@course.title%></h3>
 <h3>Created By: <%= @assignment.creator.name %></h3>
+</br>
+<% if @assignment.creator == @user %>
+<p><strong><u>Submissions:</u></strong></p>
+  <% @assignment.submissions.group_by(&:user).each do |user, completed|%>
+    <p><%= user.name%> submitted: <%=completed.map(&:content).join('; ')%></p>
+    
+  <% end %>
+  <% else %>
+</br>
+    <%= link_to "Submit this assignment!", new_assignment_submission_path(@assignment) %>
+</br>
+<% end %>
 
-
-<%= link_to "Submit this assignment!", new_assignment_submission_path(@assignment) %>
 </br>
 </br>
-
-
-
 <%= form_tag(user_course_path(@user, @assignment.course), method: "get") do %>
   <%= submit_tag("Back to Course") %>
   <%end%>
+  </br>
+<%= link_to "View All Courses", courses_path %>

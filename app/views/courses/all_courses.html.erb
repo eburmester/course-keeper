@@ -1,0 +1,5 @@
+<h1>Take a Course!</h1>
+
+<p><% @courses.each do |c| %>
+  <%= link_to c.title, course_path(c) %></br></br>
+<% end %></p>

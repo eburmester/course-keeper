@@ -11,6 +11,7 @@ class AssignmentsController < ApplicationController
     def show
         @assignment = Assignment.find_by(id: params[:id])
         @course = Course.find_by(id: params[:course_id])
+        @submissions = @assignment.submissions
     end
 
     def new

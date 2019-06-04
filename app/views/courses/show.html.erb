@@ -4,7 +4,7 @@
 
 
 <% if @course.assignments.length > 0 %>
-  <h4>Assignments:</h4> 
+  <h4>Assignments (sorted by difficulty):</h4> 
   <p>Easy:
   <p><% @course.assignments.easy.each do |a|%>
           <%= link_to a.title.capitalize, course_assignment_path(a.course_id, a.id)%></br></p>
@@ -22,7 +22,7 @@
     <%end%>
 </br>
 </br>
-<% if @course.user == current_user %>
+<% if @course.creator == current_user %>
   <%= link_to "Add an Assignment", new_course_assignment_path(@course) %></p>
 <%end%>
 </br>
@@ -32,18 +32,14 @@
 
 
 <p>
-<% if @course.user == current_user %>
-<%= form_tag(edit_user_course_path, method: "get") do %>
-  <%= submit_tag("Edit this Course") %>
-  <%end%>
-<%= form_tag(user_course_path, method: "delete") do %>
-  <%= submit_tag("Delete this Course") %>
-<%end%>
-<%= form_tag(user_courses_path, method: "get") do %>
-  <%= submit_tag("Back to My Courses") %>
-  <%end%>
+<% if @course.creator == current_user %>
+  <%= link_to "Edit this Course", edit_user_course_path(@user, @course) %></p>
+  <%= link_to "Delete this Course", user_course_path(@user, @course) %></p>
+  <%= link_to "Back to My Courses", user_courses_path(@user) %></p>
 <% end %>
 </p>
+
+<%= link_to "View All Courses", courses_path %>
 
 
 
