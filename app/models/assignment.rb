@@ -4,4 +4,8 @@ class Assignment < ApplicationRecord
     has_many :users, through: :submissions
 
     validates_presence_of :title, :difficulty
+
+    def creator 
+        @creator = self.course.user
+    end 
 end

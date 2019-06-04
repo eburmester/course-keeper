@@ -33,6 +33,7 @@ class SessionsController < ApplicationController
     
       if @user.nil?
         @user = User.new(
+          uid: auth[:uid],
           name: auth[:info][:name],
           email: auth[:info][:email],
           image: auth[:info][:image],

@@ -2,14 +2,14 @@ Rails.application.routes.draw do
   root 'homepage#index'
   resources :assignments, except: [:new, :show, :edit, :index] do 
     resources :submissions, only: [:new, :create] 
-    end 
+  end 
   resources :courses, only: [:index] do 
     resources :assignments
-    end 
+  end 
   resources :users do 
     resources :courses 
     resources :submissions, only: [:show, :index] 
-    end
+  end
 
   get '/auth/facebook/callback' => 'sessions#facebook_login'
   get '/login', to: 'sessions#new'
