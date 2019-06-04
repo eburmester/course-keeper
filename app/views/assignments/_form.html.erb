@@ -1,3 +1,13 @@
+<% if assignment.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+    <% assignment.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for [course, assignment] do |f| %>
   <%= f.label :title %>:
   <%= f.text_field :title %>
