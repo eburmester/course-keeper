@@ -8,4 +8,16 @@ class Assignment < ApplicationRecord
     def creator 
         @creator = self.course.user
     end 
+    
+    def self.easy
+        where(difficulty: 'easy')
+    end 
+    
+    def self.medium
+        where(difficulty: 'medium')
+    end
+    
+    def self.hard
+        where(difficulty: 'hard')
+    end 
 end
