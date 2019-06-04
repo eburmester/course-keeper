@@ -5,9 +5,18 @@
 
 <% if @course.assignments.length > 0 %>
   <h4>Assignments:</h4> 
-  <p><% @course.assignments.each do |a|%>
+  <p>Easy:
+  <p><% @course.assignments.easy.each do |a|%>
+          <%= link_to a.title.capitalize, course_assignment_path(a.course_id, a.id)%></br></p>
+  <% end %>
+  <p>Medium:
+  <p><% @course.assignments.medium.each do |a|%>
             <%= link_to a.title.capitalize, course_assignment_path(a.course_id, a.id)%></br></p>
-            <% end %>
+  <% end %>
+  <p>Hard:
+  <p><% @course.assignments.hard.each do |a|%>
+          <%= link_to a.title.capitalize, course_assignment_path(a.course_id, a.id)%></br></p>
+  <% end %>
     <% else %>
       <p> This course doesn't have any assignments yet. </p>
     <%end%>
