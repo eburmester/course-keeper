@@ -1,6 +1,6 @@
 <h1>All Assignments</h1>
 
 <% @course.assignments.each do |a|%>
-  Title: <%= link_to "a.title", course_assignment_path(a.course_id, a.id) %>
+  Title: <%= link_to a.title, course_assignment_path(a.course_id, a.id) %>
   Difficulty: <%= a.difficulty.capitalize %></br>
 <% end %>

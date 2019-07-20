@@ -18,6 +18,10 @@ class CoursesController < ApplicationController
         @course = Course.find_by(id: params[:id])
         @assignment = Assignment.find_by(id: params[:id])
         @user = current_user
+        respond_to do |t|
+            t.html { }
+            t.json { render json: @course }
+        end 
     end
 
     def new

@@ -4,14 +4,38 @@ class AssignmentsController < ApplicationController
     before_action :created_by_current_user, only: [:edit, :update]
     
     def index
-        @assignments = Assignment.find_by(id: params[:course_id])
-        @course = current_course
+    if params[:course_id]
+        @course = Course.find_by(id: params[:course_id])
+        @assignments = @course && @course.assignments
+      if @assignments
+        respond_to do |t|
+            t.html { }
+            t.json { render json: @assignments, each_serializer: AssignmentSerializer }
+        end 
+    else
+        @error = "Course not found"
+        respond_to do |f|
+          f.html {}
+          f.json { render json: {message: @error}, status: :not_found }
+        end
+      end
+    else
+      @assignments = Assignment.all 
+      respond_to do |f|
+        f.html {}
+        f.json { render json: @assignment }
+      end
     end 
+end
 
     def show
         @assignment = Assignment.find_by(id: params[:id])
         @course = Course.find_by(id: params[:course_id])
         @submissions = @assignment.submissions
+        respond_to do |t|
+            t.html { }
+            t.json { render json: @assignment }
+        end 
     end
 
     def new

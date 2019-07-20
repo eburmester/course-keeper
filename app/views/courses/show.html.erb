@@ -2,6 +2,8 @@
 <h2><%= @course.description %></h2>
 </br>
 
+<button id='show-assignments' data-id=' <%= @course.id %>'>Show Assignments</button>
+<div id="assignments"></div>
 
 <% if @course.assignments.length > 0 %>
   <h4>Assignments (sorted by difficulty):</h4> 
