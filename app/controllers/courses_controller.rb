@@ -28,7 +28,7 @@ class CoursesController < ApplicationController
         @user = current_user
         @course = @user.courses.build(course_params)
         @course.created_on = Date.today
-        if @course.save!
+        if @course.save
             flash[:message] = "#{@course.title} has been created"
             redirect_to user_course_path(@user, @course)
         else 

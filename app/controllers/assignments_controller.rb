@@ -23,7 +23,7 @@ class AssignmentsController < ApplicationController
         @assignment = Assignment.new(assignment_params)
         @assignment.course = Course.find_by(id: params[:course_id])
    
-        if @assignment.save!
+        if @assignment.save
             flash[:message] = "#{@assignment.title} has been created"
             redirect_to course_assignment_path(@assignment.course_id, @assignment)
         else 
