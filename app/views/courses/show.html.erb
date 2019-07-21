@@ -2,26 +2,10 @@
 <h2><%= @course.description %></h2>
 </br>
 
-<button id='show-assignments' data-id=' <%= @course.id %>'>Show Assignments</button>
+<button id="show-assignments" data-id="<%= @course.id %>">Show Assignments</button>
 <div id="assignments"></div>
 
-<% if @course.assignments.length > 0 %>
-  <h4>Assignments (sorted by difficulty):</h4> 
-  <p>Easy:
-  <p><% @course.assignments.easy.each do |a|%>
-          <%= link_to a.title.capitalize, course_assignment_path(a.course_id, a.id)%></br></p>
-  <% end %>
-  <p>Medium:
-  <p><% @course.assignments.medium.each do |a|%>
-            <%= link_to a.title.capitalize, course_assignment_path(a.course_id, a.id)%></br></p>
-  <% end %>
-  <p>Hard:
-  <p><% @course.assignments.hard.each do |a|%>
-          <%= link_to a.title.capitalize, course_assignment_path(a.course_id, a.id)%></br></p>
-  <% end %>
-    <% else %>
-      <p> This course doesn't have any assignments yet. </p>
-    <%end%>
+
 </br>
 </br>
 <% if @course.creator == current_user %>

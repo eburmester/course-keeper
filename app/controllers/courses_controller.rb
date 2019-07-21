@@ -8,6 +8,10 @@ class CoursesController < ApplicationController
     def index
         @courses = Course.all
         @assignments = Assignment.find_by(id: params[:course_id])
+        respond_to do |f|
+            f.html { render :index }
+            f.json { render json: @courses, each_serializer: CourseSerializer }
+          end
     end 
 
     def all_courses

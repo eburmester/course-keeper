@@ -10,7 +10,7 @@ class AssignmentsController < ApplicationController
       if @assignments
         respond_to do |t|
             t.html { }
-            t.json { render json: @assignments, each_serializer: AssignmentSerializer }
+            t.json { render json: @assignments, each_serializer: CourseAssignmentsSerializer }
         end 
     else
         @error = "Course not found"
@@ -23,7 +23,7 @@ class AssignmentsController < ApplicationController
       @assignments = Assignment.all 
       respond_to do |f|
         f.html {}
-        f.json { render json: @assignment }
+        f.json { render json: @assignments }
       end
     end 
 end
@@ -32,10 +32,17 @@ end
         @assignment = Assignment.find_by(id: params[:id])
         @course = Course.find_by(id: params[:course_id])
         @submissions = @assignment.submissions
-        respond_to do |t|
-            t.html { }
-            t.json { render json: @assignment }
-        end 
+        if @course.creator == current_user
+            respond_to do |t|
+                t.html { }
+                t.json { render json: @assignment, each_serializer: InstructorAssignmentSerializer }
+            end 
+        else
+            respond_to do |t|
+                t.html { }
+                t.json { render json: @assignment, each_serializer: CourseAssignmentSerializer }
+            end 
+        end
     end
 
     def new
