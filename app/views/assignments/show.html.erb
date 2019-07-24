@@ -2,6 +2,14 @@
 <h3>from <%=@course.title%></h3>
 <h3>Created By: <%= @assignment.creator.name %></h3>
 </br>
+
+
+<button id="show-submissions" data-id="<%= @assignment.id %>">Show Submissions</button>
+<div id="submissions"></div>
+<button id="submit-assignment" data-id="<%= @assignment.id %>">Submit this assignment!</button>
+<div id="submitAssignment"></div>
+
+
 <% if @assignment.creator == @user %>
 <p><strong><u>Submissions:</u></strong></p>
   <% @assignment.submissions.group_by(&:user).each do |user, completed|%>
