@@ -4,7 +4,7 @@ document.addEventListener('turbolinks:load', () => {
     getAssignments(e.target.dataset.id)
       .then(res => res.json())
       .then(assignments => displayAssignments(assignments))
-      .catch(err => displayError("This Course does not have any Assignments yet"))
+      .catch(err => displayError(err))
   })
 })
 
@@ -27,12 +27,32 @@ class Assignment {
     this.title = attributes.title;
     this.difficulty = attributes.difficulty;
     this.course_id = attributes.course_id;
+    this.user_id = attributes.user_id;
     this.submission_id = attributes.submission_id;
+    this.submissions = attributes.submissions;
   }
+
+  showAssignmentButton() {
+    return `
+    <button onclick="toggleSubmissions(${this.id})">Show Submissions</button>
+    `
+  }
+
+ 
 
   render() {
     return `
-      <div><a href="/courses/${this.course_id}/assignments/${this.id}">${this.title}</a></div>
+      <div>
+        <a href="/courses/${this.course_id}/assignments/${this.id}">${this.title}</a>${this.showAssignmentButton()}
+          <div data-subsid="${this.id}" class="dn" >${this.submissions.map(submissionData => new Submission(submissionData).render()).join('')}</div>
+      </div>
+      
     `
   }
+
+
+}
+
+function toggleSubmissions(id) {
+    document.querySelector(`[data-subsid="${id}"]`).style.display="block"
 }

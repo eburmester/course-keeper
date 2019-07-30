@@ -31,7 +31,8 @@ end
     def show
         @assignment = Assignment.find_by(id: params[:id])
         @course = Course.find_by(id: params[:course_id])
-        @submissions = @assignment.submissions
+        @submission = @assignment.submissions.build
+        @user = User.find_by(id: params[:course_id])
         if @course.creator == current_user
             respond_to do |t|
                 t.html { }
@@ -40,7 +41,7 @@ end
         else
             respond_to do |t|
                 t.html { }
-                t.json { render json: @assignment, each_serializer: CourseAssignmentSerializer }
+                t.json { render json: @assignment, each_serializer: AssignmentSerializer }
             end 
         end
     end

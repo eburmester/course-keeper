@@ -6,6 +6,10 @@ class SubmissionsController < ApplicationController
     def index
         @user = current_user
         @submissions = Submission.all.find_by(id: params[:user_id])
+        respond_to do |t|
+            t.html { }
+            t.json { render json: @submission }
+        end
     end 
 
     def show
@@ -14,6 +18,7 @@ class SubmissionsController < ApplicationController
     def new
         @submission = Submission.new
         @submission.assignment = Assignment.find_by(id: params[:assignment_id])
+      
     end
 
     def create 
@@ -22,7 +27,10 @@ class SubmissionsController < ApplicationController
 
         if @submission.save!
             flash[:message] = "#{@submission.assignment.title} submitted!"
-            redirect_to user_submissions_path(current_user)
+            respond_to do |t| 
+                t.html {}
+                t.json { render json: @submission }
+            end
         else
             flash[:message] = "There was a problem with your submission!"
             redirect_to assignment_path(current_assignment) 

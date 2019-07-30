@@ -4,12 +4,6 @@
 </br>
 
 
-<button id="show-submissions" data-id="<%= @assignment.id %>">Show Submissions</button>
-<div id="submissions"></div>
-<button id="submit-assignment" data-id="<%= @assignment.id %>">Submit this assignment!</button>
-<div id="submitAssignment"></div>
-
-
 <% if @assignment.creator == @user %>
 <p><strong><u>Submissions:</u></strong></p>
   <% @assignment.submissions.group_by(&:user).each do |user, completed|%>
@@ -21,6 +15,8 @@
     <%= link_to "Submit this assignment!", new_assignment_submission_path(@assignment) %>
 </br>
 <% end %>
+
+
 
 </br>
 </br>
