@@ -16,6 +16,11 @@ class CoursesController < ApplicationController
 
     def all_courses
         @courses = Course.all
+        @course = Course.find_by(id: params[:id])
+        respond_to do |t| 
+            t.html {}
+            t.json { render json: @courses, serializer: ShowCourseSerializer}
+        end
     end
 
     def show

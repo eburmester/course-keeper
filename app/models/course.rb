@@ -7,4 +7,10 @@ class Course < ApplicationRecord
     def creator 
         @creator = self.user
     end 
+
+    def created_on_pretty
+        @course.created_on.strftime("%B %e, %Y")
+    end
+
+  
 end
