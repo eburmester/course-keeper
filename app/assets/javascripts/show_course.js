@@ -43,7 +43,7 @@ const displayCourseShowError = (error) => {
 }
 
 function toggleShowCourse(id) {
-  document.querySelector(`[data-courseid="${id}]`).style.display="table-column"
+  document.querySelector(`[data-courseid="${id}]`).style.display="block"
 }
 
 
