@@ -19,7 +19,7 @@ class CoursesController < ApplicationController
         @course = Course.find_by(id: params[:id])
         respond_to do |t| 
             t.html {}
-            t.json { render json: @courses, serializer: ShowCourseSerializer}
+            t.json { render json: @courses, each_serializer: ShowCourseSerializer}
         end
     end
 
@@ -29,7 +29,7 @@ class CoursesController < ApplicationController
         @user = current_user
         respond_to do |t|
             t.html { }
-            t.json { render json: @course }
+            t.json { render json: @course, each_serializer: ShowCourseSerializer }
         end 
     end
 

@@ -9,7 +9,7 @@ class Course < ApplicationRecord
     end 
 
     def created_on_pretty
-        @course.created_on.strftime("%B %e, %Y")
+        self.created_on.strftime("%B %e, %Y")
     end
 
   
