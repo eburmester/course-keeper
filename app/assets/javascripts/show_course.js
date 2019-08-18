@@ -9,7 +9,7 @@ class Course {
 
   showCourseButton() {
     return `
-    <button class="show-course"  onclick="toggleShowCourse(${this.id})">${this.title}</button>
+    <button class="show-course"  onclick="loadCourseShow(${this.id})">${this.title}</button>
     `
   }
   render() {
@@ -19,24 +19,25 @@ class Course {
   }
 
   renderShow() {
+  
     return `
     
-    <div data-courseid="${this.id}">
-    <h1><${this.title}></h1>
-      <h2><${this.description}></h2>
-    </br>
+    <div>
+    <h1>${this.title}</h1>
+      <h2>${this.description}</h2>
+  
 
-    <button id="show-assignments" data-id="<${this.id}>">Show Assignments</button>
+    <a href="/courses/${this.id}/assignments" >Show Assignments</button>
     <div id="assignments"></div>
 
 
     </br>
-    </br>
-      <a href="/courses/${this.id}/assignments/new >Create a New Assignment!</p>
-    </br>
-    </br>
+    
+      <a href="/courses/${this.id}/assignments/new" >Create a New Assignment!</p>
+    
+    
 
-    <p>Created On: <${created_on_pretty}></p>
+    
     </div>
     `
   }
@@ -61,16 +62,16 @@ document.addEventListener('turbolinks:load', () => {
 })
 
 const getCourseShow = (courseId) => {
-  return myFetch(`http://localhost:3000/courses/${courseId}.json`)
+  return myFetch(`/courses/${courseId}.json`)
 }
 
 const getAllCourses = () => {
-  return myFetch(`http://localhost:3000/courses.json`)
+  return myFetch(`/courses.json`)
 }
 
 const displayCourseShow = (results) => {
   let html = new Course(results).renderShow()
-  document.getElementById('courses').innerHTML = html
+  document.getElementById('course-show').innerHTML = html
 }
 
 const displayCourseIndex = (results) => {
@@ -82,9 +83,10 @@ const displayCourseShowError = (error) => {
   document.getElementById('show-course').innerHTML = error;
 }
 
-function toggleShowCourse(id) {
-  debugger
-  document.querySelector(`[data-courseid="${id}]`).style.display="block"
+const loadCourseShow = (id) => {
+  getCourseShow(id)
+    .then(res => res.json())
+    .then(course => displayCourseShow(course))
 }
 
 
