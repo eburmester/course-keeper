@@ -11,10 +11,24 @@
     
   <% end %>
   <% else %>
+  <h1>Your Submissions:</h1>
+    <% @assignment.submissions.by_user(current_user).each do |sub| %>
+      <li><%= sub.content %></li>
+    <% end %>
 </br>
-    <%= link_to "Submit this assignment!", new_assignment_submission_path(@assignment) %>
+<h1>Submit your assignment!</h1>
+<h3><%= @assignment.title %></h3>
+<p><%= form_for [@assignment, Submission.new] do |s| %>
+  <%= s.label :content, "Answer"%>:
+  <%= s.text_field :content %>
+
+
+  </br>
+  <%= s.submit "Submit" %>
+  <%end%></p>
 </br>
 <% end %>
+
 
 
 

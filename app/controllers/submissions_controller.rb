@@ -1,5 +1,5 @@
 class SubmissionsController < ApplicationController
-    before_action :set_assignment, only: [:show, :edit, :update]
+    before_action :set_assignment, only: [:show, :edit, :update, :create]
     before_action :created_by_current_user, only: [:edit, :update]
     helper_method :current_assignment
 
@@ -22,13 +22,13 @@ class SubmissionsController < ApplicationController
     end
 
     def create 
-        @submission = Submission.new(submission_params)
+        @submission = current_user.submissions.build(submission_params)
         @submission.assignment = Assignment.find_by(id: params[:assignment_id])
-
+    
         if @submission.save!
             flash[:message] = "#{@submission.assignment.title} submitted!"
             respond_to do |t| 
-                t.html {}
+                t.html { redirect_to course_assignment_path(@assignment.course, @assignment)}
                 t.json { render json: @submission }
             end
         else
@@ -53,7 +53,7 @@ class SubmissionsController < ApplicationController
     end
 
     def set_assignment
-        @assignment = Assignment.find_by(id: params[:id])
+        @assignment = Assignment.find_by(id: params[:assignment_id])
     end 
 
     def current_assignment
