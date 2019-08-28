@@ -11,14 +11,16 @@
     
   <% end %>
   <% else %>
+  <div id="submissions">
   <h1>Your Submissions:</h1>
     <% @assignment.submissions.by_user(current_user).each do |sub| %>
       <li><%= sub.content %></li>
     <% end %>
+  </div>
 </br>
 <h1>Submit your assignment!</h1>
 <h3><%= @assignment.title %></h3>
-<p><%= form_for [@assignment, Submission.new] do |s| %>
+<p><%= form_for [@assignment, Submission.new], :html => { :class => "new_submission" } do |s| %>
   <%= s.label :content, "Answer"%>:
   <%= s.text_field :content %>
 
