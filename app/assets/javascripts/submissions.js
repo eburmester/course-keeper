@@ -13,7 +13,9 @@
 //     `
 //   }
 // }
-
+// function append(parent, el) {
+//   return parent.appendChild(el); // Append the second parameter(element) to the first one
+// }
 
 document.addEventListener('turbolinks:load', () => {
   let form = document.getElementById('new_submission') 
@@ -33,10 +35,16 @@ document.addEventListener('turbolinks:load', () => {
           body: JSON.stringify(data)
         })
           .then(res=>res.json())
+//           .then(function(data)) {
+//                 append(submissions, data);
+//                 }
+    
           .then(res=> console.log(res))
           debugger
     })
   })
+
+
 
   // const displaySubmissions = (results) => {
   //   let html = results.content
