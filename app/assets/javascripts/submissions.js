@@ -1,8 +1,3 @@
-
-// function append(data) {
-//   document.getElementById('submissions').appendChild(data)
-// }
-
 document.addEventListener('turbolinks:load', () => {
   let form = document.getElementById('new_submission') 
   form && form.addEventListener('submit', (event) => {
@@ -19,18 +14,29 @@ document.addEventListener('turbolinks:load', () => {
             'X-CSRF-token': token
           },
           body: JSON.stringify(data)
-        
         })
-        
           .then(res=>res.json())
           .then(data => {
-            debugger
             subs.append(data.content);
             event.target.querySelector("#submission_content").value = "";
             event.target.querySelector("[type=submit]").disabled = false
             }) 
     })
   })
+
+  class Submission {
+    constructor(attributes) {
+      this.id = attributes.id;
+      this.content = attributes.content;
+      this.assignment_id = attributes.assignment_id;
+    }
+
+  render() {
+    return `
+    <li>${this.content}</li>
+    `
+  }
+  }
 
 
 

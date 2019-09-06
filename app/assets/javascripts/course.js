@@ -49,7 +49,14 @@ class Assignment {
       
     `
   }
-
+  
+  renderAssignments() {
+    return `
+      <div>
+        <a href="/courses/${this.course_id}/assignments/${this.id}">${this.title}</a>
+      </div>
+      `
+  }
 
 }
 
