@@ -1,20 +1,6 @@
-// class Submission {
-//   constructor(attributes) {
-//     this.id = attributes.id;
-//     this.content = attributes.content;
-//   }
 
-//   renderSubs() {
-//     return `
-//     <div id="submissions">
-//     <h1>Your Submissions:</h1>
-//       <li>${this.submission.content}</li>
-//     </div>
-//     `
-//   }
-// }
-// function append(parent, el) {
-//   return parent.appendChild(el); // Append the second parameter(element) to the first one
+// function append(data) {
+//   document.getElementById('submissions').appendChild(data)
 // }
 
 document.addEventListener('turbolinks:load', () => {
@@ -24,7 +10,7 @@ document.addEventListener('turbolinks:load', () => {
     let data = {submission: {}};
      data['submission']['content'] = event.target.querySelector('#submission_content').value;
      let token = event.target.querySelector('input[name=authenticity_token').value
-     
+     let subs = document.getElementById('submissions')
      myFetch(`${event.target.action}.json`,{
           method: 'POST',
           headers: {
@@ -33,22 +19,19 @@ document.addEventListener('turbolinks:load', () => {
             'X-CSRF-token': token
           },
           body: JSON.stringify(data)
+        
         })
+        
           .then(res=>res.json())
-//           .then(function(data)) {
-//                 append(submissions, data);
-//                 }
-    
-          .then(res=> console.log(res))
-          debugger
+          .then(data => {
+            debugger
+            subs.append(data.content);
+            event.target.querySelector("#submission_content").value = "";
+            event.target.querySelector("[type=submit]").disabled = false
+            }) 
     })
   })
 
 
 
-  // const displaySubmissions = (results) => {
-  //   let html = results.content
-  //   document.getElementById('submissions').innerHTML = html
-  // }
-
-
+  
