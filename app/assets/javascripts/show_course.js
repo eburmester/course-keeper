@@ -5,7 +5,10 @@ class Course {
     this.description = attributes.description;
     this.created_on_pretty = attributes.created_on_pretty;
     this.created_by = attributes.created_by;
+    this.assignments = attributes.assignments;
   }
+
+  
 
   showCourseButton() {
     return `
@@ -17,6 +20,8 @@ class Course {
     ${this.showCourseButton()}
     `
   }
+
+  
 
   renderShow() {
   
@@ -43,15 +48,6 @@ class Course {
   }
 }
 
-// const attachListeners = () => {
-//   let showCourseButton = document.getElementById('show-course')
-//   showCourseButton.addEventListener('click', (e) => {
-//     getCourseShow(e.target.dataset.id)
-//       .then(res => res.json())
-//       .then(course => displayCourseShow(course))
-//       .catch(err => displayCourseShowError(err))
-//   })
-// }
 
 document.addEventListener('turbolinks:load', () => {
   getAllCourses()
@@ -87,6 +83,10 @@ const loadCourseShow = (id) => {
   getCourseShow(id)
     .then(res => res.json())
     .then(course => displayCourseShow(course))
+}
+
+const displayAssignments = (assignments) => {
+  let assign = assignments.map(assignData => new Assignment(assignData))
 }
 
 
